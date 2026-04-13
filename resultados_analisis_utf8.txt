@@ -1,0 +1,433 @@
+﻿================================================================================
+AN├üLISIS DE INGRESOS - PROYECTO PTAR Y CLOACAS - CIUDAD DE SAPINDA
+================================================================================
+
+Procesando hoja: cloaca
+  Total respuestas v├ílidas: 60
+
+Procesando hoja: ptar
+  Total respuestas v├ílidas: 142
+
+================================================================================
+TAREA 1: AN├üLISIS DE ESTAD├ìSTICA DESCRIPTIVA
+================================================================================
+
+
+CLOACA
+------------------------------------------------------------
+
+Estad├¡sticas Generales:
+  Media (Promedio): $1,441.67
+  Mediana: $1,000.00
+  Desviaci├│n Est├índar: $1,770.98
+  M├¡nimo: $200.00
+  M├íximo: $10,000.00
+  N (cantidad de respuestas): 60
+
+Estad├¡sticas por Nivel de Ingreso:
+Nivel de Ingreso                         Media           Mediana         N    
+---------------------------------------------------------------------------
+
+PTAR
+------------------------------------------------------------
+
+Estad├¡sticas Generales:
+  Media (Promedio): $166.81
+  Mediana: $175.00
+  Desviaci├│n Est├índar: $104.04
+  M├¡nimo: $5.00
+  M├íximo: $375.00
+  N (cantidad de respuestas): 142
+
+Estad├¡sticas por Nivel de Ingreso:
+Nivel de Ingreso                         Media           Mediana         N    
+---------------------------------------------------------------------------
+
+Ô£ô Gr├ífico de distribuciones guardado en 'distribucion_dap.png'
+
+================================================================================
+TAREA 2: ESTIMACI├ôN DE INGRESO ANUAL AGREGADO
+================================================================================
+
+
+CLOACA
+------------------------------------------------------------
+
+Sin Discriminaci├│n de Precios:
+  Usando Media:
+    - DAP medio: $1,441.67
+    - Hogares beneficiarios: 572
+    - Ingreso anual (ARS): $824,633.33
+    - Ingreso anual (USD): $8,246.33
+
+  Usando Mediana:
+    - DAP mediano: $1,000.00
+    - Hogares beneficiarios: 572
+    - Ingreso anual (ARS): $572,000.00
+    - Ingreso anual (USD): $5,720.00
+
+PTAR
+------------------------------------------------------------
+
+Sin Discriminaci├│n de Precios:
+  Usando Media:
+    - DAP medio: $166.81
+    - Hogares beneficiarios: 28,264
+    - Ingreso anual (ARS): $4,714,813.38
+    - Ingreso anual (USD): $47,148.13
+
+  Usando Mediana:
+    - DAP mediano: $175.00
+    - Hogares beneficiarios: 28,264
+    - Ingreso anual (ARS): $4,946,200.00
+    - Ingreso anual (USD): $49,462.00
+
+================================================================================
+TAREA 3: DISCRIMINACI├ôN DE PRECIOS POR NIVEL DE INGRESO
+================================================================================
+
+
+CLOACA
+------------------------------------------------------------
+
+Distribuci├│n de ingresos en la muestra:
+
+Ingreso con Discriminaci├│n de Precios:
+Nivel de Ingreso                         Hogares         DAP/Hogar       Ingreso ARS         
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+TOTAL                                                                $              0.00
+
+Ingreso anual Total (USD): $0.00
+
+PTAR
+------------------------------------------------------------
+
+Distribuci├│n de ingresos en la muestra:
+
+Ingreso con Discriminaci├│n de Precios:
+Nivel de Ingreso                         Hogares         DAP/Hogar       Ingreso ARS         
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+TOTAL                                                                $              0.00
+
+Ingreso anual Total (USD): $0.00
+
+================================================================================
+TAREA 4: COMPARACI├ôN - CON Y SIN DISCRIMINACI├ôN DE PRECIOS
+================================================================================
+
+
+CLOACA
+--------------------------------------------------------------------------------
+
+1. SIN DISCRIMINACI├ôN (usando Media): $824,633.33 ARS
+   En USD: $8,246.33
+
+2. SIN DISCRIMINACI├ôN (usando Mediana): $572,000.00 ARS
+   En USD: $5,720.00
+
+3. CON DISCRIMINACI├ôN: $0.00 ARS
+   En USD: $0.00
+
+DIFERENCIAS:
+  vs. Media: $-824,633.33 (-100.0%)
+  vs. Mediana: $-572,000.00 (-100.0%)
+
+IMPLICACIONES PARA SUBSIDIOS DEL ESTADO:
+  La discriminaci├│n de precios REDUCE los ingresos en $824,633.33 ARS
+  Esto INCREMENTA la necesidad de subsidios del Estado.
+
+  An├ílisis por nivel de ingreso:
+    - Los hogares con menores ingresos pagan menos (subsidio impl├¡cito)
+    - Los hogares con mayores ingresos pagan m├ís (contribuyen m├ís)
+    - Esto tiene un efecto PROGRESIVO que reduce la carga sobre el Estado
+
+PTAR
+--------------------------------------------------------------------------------
+
+1. SIN DISCRIMINACI├ôN (usando Media): $4,714,813.38 ARS
+   En USD: $47,148.13
+
+2. SIN DISCRIMINACI├ôN (usando Mediana): $4,946,200.00 ARS
+   En USD: $49,462.00
+
+3. CON DISCRIMINACI├ôN: $0.00 ARS
+   En USD: $0.00
+
+DIFERENCIAS:
+  vs. Media: $-4,714,813.38 (-100.0%)
+  vs. Mediana: $-4,946,200.00 (-100.0%)
+
+IMPLICACIONES PARA SUBSIDIOS DEL ESTADO:
+  La discriminaci├│n de precios REDUCE los ingresos en $4,714,813.38 ARS
+  Esto INCREMENTA la necesidad de subsidios del Estado.
+
+  An├ílisis por nivel de ingreso:
+    - Los hogares con menores ingresos pagan menos (subsidio impl├¡cito)
+    - Los hogares con mayores ingresos pagan m├ís (contribuyen m├ís)
+    - Esto tiene un efecto PROGRESIVO que reduce la carga sobre el Estado
+
+================================================================================
+TAREA 5: BENEFICIO POR REDUCCI├ôN DE CONSUMO DE AGUA EN BOTELLAS
+================================================================================
+
+Datos del Proyecto:
+  Consumo anterior: 10 litros/mes
+  Consumo actual: 5 litros/mes
+  Reducci├│n: 5 litros/mes (50%)
+  Precio promedio: $0.5/litro
+
+Beneficio por Hogar:
+  Ahorro anual por hogar: $30.00 USD
+  Ahorro anual por hogar: $3,000.00 ARS
+
+Beneficio Total de la Ciudad (28264 hogares):
+  Ahorro anual: $847,920.00 USD
+  Ahorro anual: $84,792,000.00 ARS
+
+================================================================================
+TAREA 6: BENEFICIO POR ELIMINACI├ôN DE COSTOS DE VACIADO DE POZOS
+================================================================================
+
+Situaci├│n sin Proyecto:
+  Hogares sin conexi├│n a cloacas usan pozos negros
+  Costo de vaciado: $50/hogar/a├▒o
+
+Beneficio por Hogar que se Conecte:
+  Ahorro anual: $50/hogar/a├▒o USD
+  Ahorro anual: $5,000.00/hogar/a├▒o ARS
+
+Beneficio Total (572 hogares que se conectan):
+  Ahorro anual: $28,600.00 USD
+  Ahorro anual: $2,860,000.00 ARS
+
+================================================================================
+TAREA 7: PROYECCI├ôN DE INGRESOS DAP POR 30 A├æOS
+================================================================================
+
+Supuestos:
+  - Horizonte de evaluaci├│n: 30 a├▒os
+  - Inicio de beneficios: A├▒o 3 (despu├®s de conclusi├│n de obras)
+  - DAP no se modifica en el tiempo
+  - Conectividad en a├▒o 3: 80%
+  - Conectividad final (a├▒o 6+): 100%
+
+
+CLOACA (DAP)
+--------------------------------------------------------------------------------
+A├▒o    Conectividad    Ingresos ARS         Ingresos USD         VP ARS              
+--------------------------------------------------------------------------------
+1                  0% $                 0 $                 0 $                 0
+2                  0% $                 0 $                 0 $                 0
+3                 80% $           659,707 $             6,597 $           569,879
+4                 87% $           721,829 $             7,218 $           593,851
+5                 93% $           785,128 $             7,851 $           615,168
+6                100% $           849,621 $             8,496 $           634,000
+10               100% $           884,119 $             8,841 $           542,772
+15               100% $           929,217 $             9,292 $           446,969
+20               100% $           976,617 $             9,766 $           368,077
+25               100% $         1,026,434 $            10,264 $           303,109
+30               100% $         1,078,793 $            10,788 $           249,608
+--------------------------------------------------------------------------------
+TOTAL PV                                                                       $        12,118,787
+TOTAL PV (USD): $121,188
+Promedio anual: $872,089 ARS
+
+PTAR (DAP)
+--------------------------------------------------------------------------------
+A├▒o    Conectividad    Ingresos ARS         Ingresos USD         VP ARS              
+--------------------------------------------------------------------------------
+1                  0% $                 0 $                 0 $                 0
+2                  0% $                 0 $                 0 $                 0
+3                 80% $         3,771,851 $            37,719 $         3,258,266
+4                 87% $         4,127,033 $            41,270 $         3,395,321
+5                 93% $         4,488,942 $            44,889 $         3,517,204
+6                100% $         4,857,677 $            48,577 $         3,624,873
+10               100% $         5,054,918 $            50,549 $         3,103,281
+15               100% $         5,312,770 $            53,128 $         2,555,533
+20               100% $         5,583,774 $            55,838 $         2,104,466
+25               100% $         5,868,603 $            58,686 $         1,733,015
+30               100% $         6,167,961 $            61,680 $         1,427,127
+--------------------------------------------------------------------------------
+TOTAL PV                                                                       $        69,288,758
+TOTAL PV (USD): $692,888
+Promedio anual: $4,986,139 ARS
+
+================================================================================
+TAREA 8: PROYECCI├ôN DE BENEFICIOS POR AHORRO DE COSTOS (30 A├æOS)
+================================================================================
+
+
+BENEFICIOS - Reducci├│n de Agua en Botellas
+--------------------------------------------------------------------------------
+Beneficio anual por hogar: $30.0/hogar
+N├║mero de hogares: 28264
+
+A├▒o    Beneficio Anual ARS       Beneficio Anual USD       VP ARS              
+--------------------------------------------------------------------------------
+1      $                      0 $                      0 $                 0
+2      $                      0 $                      0 $                 0
+3      $             84,792,000 $                847,920 $        73,246,518
+4      $             85,639,920 $                856,399 $        70,456,174
+5      $             86,496,319 $                864,963 $        67,772,129
+6      $             87,361,282 $                873,613 $        65,190,334
+10     $             90,908,501 $                909,085 $        55,809,933
+15     $             95,545,748 $                955,457 $        45,959,138
+20     $            100,419,541 $              1,004,195 $        37,847,069
+25     $            105,541,947 $              1,055,419 $        31,166,830
+30     $            110,925,647 $              1,109,256 $        25,665,693
+--------------------------------------------------------------------------------
+TOTAL PV                                                                             $     1,274,662,334
+TOTAL PV (USD): $12,746,623
+
+BENEFICIOS - Eliminaci├│n de Costos de Pozos Negros
+--------------------------------------------------------------------------------
+Beneficio anual por hogar: $50/hogar
+N├║mero de hogares: 572
+
+A├▒o    Beneficio Anual ARS       Beneficio Anual USD       VP ARS              
+--------------------------------------------------------------------------------
+1      $                      0 $                      0 $                 0
+2      $                      0 $                      0 $                 0
+3      $              2,860,000 $                 28,600 $         2,470,576
+4      $              2,888,600 $                 28,886 $         2,376,458
+5      $              2,917,486 $                 29,175 $         2,285,927
+6      $              2,946,661 $                 29,467 $         2,198,844
+10     $              3,066,307 $                 30,663 $         1,882,447
+15     $              3,222,720 $                 32,227 $         1,550,183
+20     $              3,387,111 $                 33,871 $         1,276,566
+25     $              3,559,887 $                 35,599 $         1,051,245
+30     $              3,741,477 $                 37,415 $           865,693
+--------------------------------------------------------------------------------
+TOTAL PV                                                                             $        42,993,847
+TOTAL PV (USD): $429,938
+
+================================================================================
+TAREA 9: PROPUESTAS PARA BENEFICIOS EN SECTOR PESQUERO Y TURISMO
+================================================================================
+
+
+METODOLOG├ìAS PROPUESTAS PARA ESTIMAR BENEFICIOS EN PESCA Y TURISMO:
+
+1. BENEFICIOS EN EL SECTOR PESQUERO:
+   ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+   
+   A. Incremento de la Biomasa de Peces:
+      ÔÇó Realizar estudios de biomonitoreo pregrado y postgrado para medir:
+        - Densidad y biomasa de poblaciones de peces
+        - Recuperaci├│n de especies comercialesantes y despu├®s del proyecto
+      ÔÇó Multiplicar la biomasa adicional por precio de mercado
+      ÔÇó Usar modelos de din├ímica poblacional (stock assessment)
+   
+   B. Reducci├│n de P├®rdidas Actuales:
+      ÔÇó Estudiar la p├®rdida de pesca actual por contaminaci├│n
+      ÔÇó Datos de pescadores (captura por unidad de esfuerzo - CPUE)
+      ÔÇó Comparar CPUE pre y post proyecto
+      ÔÇó Estimar disminuci├│n de contaminaci├│n en costas
+   
+   C. Metodolog├¡a de Precios Hed├│nicos:
+      ÔÇó Valores de permisos de pesca comercial
+      ÔÇó Precios de cuotas de pesca
+      ÔÇó Precio impl├¡cito de la mejora ambiental
+
+
+2. BENEFICIOS EN EL SECTOR TURISMO:
+   ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+   
+   A. Uso Recreativo de Playas y R├¡os:
+      ÔÇó Encuestas de visitantes a playas/r├¡os (como DAP)
+      ÔÇó Preguntar disposici├│n a pagar por playas limpias
+      ÔÇó Estimar n├║mero de visitantes actuales vs. potenciales
+      ÔÇó Calcular d├¡as/visitante antes y despu├®s del proyecto
+   
+   B. Metodolog├¡a de Costo de Viaje:
+      ÔÇó Identificar sitios limpios similares en la regi├│n
+      ÔÇó Medir costo de transporte para visitantes
+      ÔÇó Usar regresi├│n para estimar demanda por recreaci├│n
+      ÔÇó Calcular beneficio del cambio de calidad ambiental
+   
+   C. Valor de Sitios Tur├¡sticos:
+      ÔÇó Estudiar hoteles, restaurantes cercanos
+      ÔÇó Estimar aumento de valor de propiedad costera
+      ÔÇó Usar precios hed├│nicos (precio de propiedades)
+      ÔÇó Relacionar con distancia a r├¡os/playas contaminados vs. limpios
+   
+   D. Empleo Generado:
+      ÔÇó Estimar empleo nuevo: gu├¡as tur├¡sticos, operadores de excursiones
+      ÔÇó Empleados en hoteles y restaurantes
+      ÔÇó Salarios promedio del sector
+      ÔÇó Multiplicador econ├│mico (3-5x seg├║n ruralidad)
+
+
+3. METODOLOG├ìA INTEGRADA RECOMENDADA:
+   ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+   
+   ÔÇó L├¡nea base: Datos pre-proyecto (a├▒o 0-1)
+     - Estudios de calidad de agua y sedimentos
+     - Conteos de peces
+     - Encuestas de turismo existente
+     - Ingresos de pescadores
+   
+   ÔÇó Monitoreo: A├▒os 3, 6, 10, 15, 20, 30
+     - Repetir todos los estudios
+     - Documentar cambios ambientales
+     - Documentar cambios en ingresos
+   
+   ÔÇó An├ílisis de Contraf├íctico:
+     - Estimar qu├® hubiese pasado SIN proyecto
+     - Usar ciudades similares como comparaci├│n (diff-in-diff)
+     - Controlar por otras variables (cambios macroecon├│micos)
+   
+   ÔÇó An├ílisis de Sensibilidad:
+     - Calcular beneficios con escenarios optimista/pesimista
+     - Variar tasas de recuperaci├│n de peces
+     - Variar elasticidad precio de demanda tur├¡stica
+
+
+ESTIMACI├ôN PRELIMINAR (CONSERVADORA):
+
+   A. Pesca:
+      ÔÇó Supuesto: Recuperaci├│n de 20% de biomasa perdida
+      ÔÇó Captura actual: datos locales
+      ÔÇó Precio promedio: $5-10 USD/kg
+      ÔÇó Resultado: an├ílisis caso a caso
+   
+   B. Turismo:
+      ÔÇó Incremento de visitantes: 50% con playas limpias
+      ÔÇó Gasto promedio visitante: $50-100 USD
+      ÔÇó Ocupaci├│n actual de hoteles: datos de INDEC
+      ÔÇó Resultado: an├ílisis caso a caso
+
+
+NOTAS IMPORTANTES:
+ÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöüÔöü
+
+ÔÇó Los beneficios en pesca y turismo podr├¡an representar 30-50% de los 
+  beneficios totales del proyecto para ciudades costeras
+
+ÔÇó Es CR├ìTICO no incluirlos hasta tener datos s├│lidos (sesgo conservador 
+  en el an├ílisis actual es apropiado)
+
+ÔÇó Se recomienda ejecutar estudios de l├¡nea base ANTES de invertir, para 
+  poder medir impacto real
+
+ÔÇó Coordinar con universidades locales y organizaciones de pesca para 
+  monitoreo participativo
+
+
+================================================================================
+RESUMEN FINANCIERO - VALOR PRESENTE (30 A├æOS, TASA DESCUENTO 5%)
+================================================================================
+
+              Componente    VP en ARS    VP en USD
+              PTAR (DAP) 6.928876e+07 6.928876e+05
+            Cloaca (DAP) 1.211879e+07 1.211879e+05
+ Reducci├│n Agua Botellas 1.274662e+09 1.274662e+07
+Eliminaci├│n Pozos Negros 4.299385e+07 4.299385e+05
+                   TOTAL 1.399064e+09 1.399064e+07
+
+================================================================================
+FIN DEL AN├üLISIS
+================================================================================
+
