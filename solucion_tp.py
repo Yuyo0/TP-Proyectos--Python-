@@ -18,54 +18,124 @@ print("ANÁLISIS DE INGRESOS - PROYECTO PTAR Y CLOACAS - CIUDAD DE SAPINDA")
 print("=" * 80)
 print()
 
-# Load data
+# Load data - CORRECTED READING
 excel_path = r"c:\VS Code Projects\TP Proyectos (Python)\2021 - TP2 - Ingresos.xlsx"
-df_cloaca = pd.read_excel(excel_path, sheet_name='cloaca')
-df_ptar = pd.read_excel(excel_path, sheet_name='ptar')
+
+# Leer sin header para procesar la estructura completa
+df_cloaca_raw = pd.read_excel(excel_path, sheet_name='cloaca', header=None)
+df_ptar_raw = pd.read_excel(excel_path, sheet_name='ptar', header=None)
 
 # Clean data - Extract relevant columns
 # Structure: Column 1 = ID, Column 2 = DAP amount, Columns 3-5 = Education, Columns 6-10 = Income brackets
 
-def clean_dataframe(df, sheet_name):
-    """Clean and prepare the survey data"""
+def clean_dataframe(df_raw, sheet_name):
+    """Clean and prepare the survey data - CORRECTED VERSION"""
     print(f"Procesando hoja: {sheet_name}")
     
-    # Extract DAP column (column 2, index 1)
-    dap_column = df.iloc[:, 1]
+    # La estructura real del Excel:
+    # Fila 0: Headers principales
+    # Fila 1: Sub-headers (nombres de columnas)
+    # Filas 2+: Datos
     
-    # Extract income category (columns 6-10, indices 6-10)
-    income_cols = df.iloc[:, 6:11]
+    # Extraer sub-headers (fila 1) que son los nombres reales de columnas
+    subheaders = df_raw.iloc[1]
     
-    # Create a clean dataframe
+    # Asignar nombres de columnas basados en sub-headers donde existan
+    col_names = []
+    for i in range(len(subheaders)):
+        if pd.notna(subheaders[i]):
+            col_names.append(str(subheaders[i]))
+        else:
+            # Si no hay sub-header, usar el header principal si existe
+            if pd.notna(df_raw.iloc[0, i]):
+                col_names.append(str(df_raw.iloc[0, i])[:20] + "...")
+            else:
+                col_names.append(f"Col_{i}")
+    
+    # Crear dataframe con datos (desde fila 2)
+    df_data = df_raw.iloc[2:].copy()
+    df_data.columns = col_names
+    
+    print(f"  Columnas identificadas: {list(df_data.columns)}")
+    
+    # Crear dataframe limpio
     clean_df = pd.DataFrame()
-    clean_df['ID'] = df.iloc[:, 0]
-    clean_df['DAP'] = pd.to_numeric(dap_column, errors='coerce')
     
-    # Decode income category
-    income_categories = [
+    # 1. ID - buscar columna que contenga 'ID' o usar primera columna
+    id_col = None
+    for col in df_data.columns:
+        if 'ID' in str(col).upper():
+            id_col = col
+            break
+    if id_col is None:
+        id_col = df_data.columns[0]  # Primera columna como fallback
+    
+    clean_df['ID'] = df_data[id_col]
+    
+    # 2. DAP (columna 'Respuesta abierta')
+    clean_df['DAP'] = pd.to_numeric(df_data['Respuesta abierta'], errors='coerce')
+    
+    # 3. Educación - buscar cuál columna tiene 1.0
+    education_mapping = {
+        'Primario': 'Primario',
+        'Secundario': 'Secundario', 
+        'Terciario': 'Terciario',
+        'Universitario': 'Universitario'
+    }
+    
+    clean_df['Education_Level'] = 'Unknown'
+    for edu_col, edu_level in education_mapping.items():
+        if edu_col in df_data.columns:
+            mask = df_data[edu_col] == 1.0
+            clean_df.loc[mask, 'Education_Level'] = edu_level
+    
+    # 4. Ingreso - LAS COLUMNAS CONTIENEN VALORES NUMÉRICOS, NO INDICADORES
+    income_columns = [
         'Menos de $ 20000',
-        'Entre $ 20000 y $ 30000',
+        'Entre $ 20000 y $ 30000', 
         'Entre $ 30000 y $ 40000',
         'Entre $ 40000 y $ 60000',
         '$ 60000 o más'
     ]
     
     clean_df['Income_Category'] = 'Unknown'
-    for i, income_cat in enumerate(income_categories):
-        mask = income_cols.iloc[:, i] == 1.0
-        clean_df.loc[mask, 'Income_Category'] = income_cat
+    clean_df['Income_Value'] = np.nan
     
-    # Remove rows without DAP values
+    for idx, row in df_data.iterrows():
+        income_found = False
+        for income_cat in income_columns:
+            if income_cat in df_data.columns:
+                value = row[income_cat]
+                if pd.notna(value) and isinstance(value, (int, float)) and value > 0:
+                    clean_df.loc[idx, 'Income_Category'] = income_cat
+                    clean_df.loc[idx, 'Income_Value'] = value
+                    income_found = True
+                    break
+        
+        # Si no se encontró valor numérico, marcar como Unknown
+        if not income_found:
+            clean_df.loc[idx, 'Income_Category'] = 'Unknown'
+    
+    # Filtrar datos válidos
     clean_df = clean_df[clean_df['DAP'].notna()].copy()
     clean_df = clean_df[clean_df['DAP'] > 0].copy()
     
-    print(f"  Total respuestas válidas: {len(clean_df)}")
+    print(f"  Respuestas con DAP válido: {len(clean_df)}")
+    print(f"  Respuestas con ingreso identificado: {len(clean_df[clean_df['Income_Category'] != 'Unknown'])}")
+    print(f"  Respuestas con educación identificada: {len(clean_df[clean_df['Education_Level'] != 'Unknown'])}")
+    
+    # Mostrar distribución de ingresos
+    income_dist = clean_df['Income_Category'].value_counts()
+    print("  Distribución de ingresos:")
+    for cat, count in income_dist.items():
+        print(f"    {cat}: {count} respuestas")
+    
     print()
     
     return clean_df
 
-df_cloaca_clean = clean_dataframe(df_cloaca, 'cloaca')
-df_ptar_clean = clean_dataframe(df_ptar, 'ptar')
+df_cloaca_clean = clean_dataframe(df_cloaca_raw, 'cloaca')
+df_ptar_clean = clean_dataframe(df_ptar_raw, 'ptar')
 
 # ============================================================================
 # TASK 1: DESCRIPTIVE STATISTICS
@@ -193,53 +263,69 @@ print("TAREA 3: DISCRIMINACIÓN DE PRECIOS POR NIVEL DE INGRESO")
 print("=" * 80)
 print()
 
-def calculate_discriminated_income(df, project_name, num_households_by_income):
-    """Calculate revenue with price discrimination"""
+def calculate_discriminated_income(df, project_name, num_households):
+    """Calculate revenue with price discrimination - UPDATED VERSION"""
     print(f"\n{project_name.upper()}")
     print("-" * 60)
     
-    # Map income categories to household numbers
-    # Assumption: distribute households proportionally based on sample
-    income_distribution = df.groupby('Income_Category').size() / len(df)
+    # Calcular DAP medio por categoría de ingreso usando datos reales
+    income_dap_means = {}
+    income_counts = {}
     
-    print(f"\nDistribución de ingresos en la muestra:")
-    for income_cat, proportion in income_distribution.items():
+    for income_cat in df['Income_Category'].unique():
         if income_cat != 'Unknown':
-            print(f"  {income_cat}: {proportion*100:.1f}%")
+            subset = df[df['Income_Category'] == income_cat]
+            if len(subset) > 0:
+                income_dap_means[income_cat] = subset['DAP'].mean()
+                income_counts[income_cat] = len(subset)
     
-    # Calculate mean DAP by income level
-    mean_dap_by_income = df.groupby('Income_Category')['DAP'].mean()
+    print(f"\nDAP medio por categoría de ingreso (datos reales):")
+    print(f"{'Categoría':<25} {'DAP Medio':<15} {'N':<5}")
+    print("-" * 45)
     
-    # Calculate aggregate income with discrimination
+    total_weighted_dap = 0
+    total_responses = 0
+    
+    for income_cat, dap_mean in income_dap_means.items():
+        count = income_counts[income_cat]
+        print(f"{income_cat:<25} ${dap_mean:>13,.2f} {count:>3}")
+        total_weighted_dap += dap_mean * count
+        total_responses += count
+    
+    # DAP medio ponderado por distribución real
+    if total_responses > 0:
+        overall_weighted_dap = total_weighted_dap / total_responses
+        print(f"\nDAP medio ponderado: ${overall_weighted_dap:,.2f}")
+    
+    # Calcular ingresos usando distribución real de la muestra
     total_revenue_ars = 0
-    total_revenue_ars_by_income = {}
     
-    print(f"\nIngreso con Discriminación de Precios:")
-    print(f"{'Nivel de Ingreso':<40} {'Hogares':<15} {'DAP/Hogar':<15} {'Ingreso ARS':<20}")
-    print("-" * 90)
+    print(f"\nCálculo de ingresos con discriminación:")
+    print(f"{'Categoría':<25} {'Hogares':<10} {'DAP/Hogar':<15} {'Ingreso ARS':<20}")
+    print("-" * 70)
     
-    for income_cat in mean_dap_by_income.index:
-        if income_cat != 'Unknown':
-            households_in_category = int(num_households_by_income * income_distribution[income_cat])
-            dap_per_household = mean_dap_by_income[income_cat]
-            revenue = households_in_category * dap_per_household
-            total_revenue_ars += revenue
-            total_revenue_ars_by_income[income_cat] = revenue
-            
-            print(f"{income_cat:<40} {households_in_category:>13,} ${dap_per_household:>13,.2f} ${revenue:>18,.2f}")
+    for income_cat, dap_mean in income_dap_means.items():
+        # Proporción de esta categoría en la muestra
+        proportion = income_counts[income_cat] / total_responses
+        households_in_cat = int(num_households * proportion)
+        
+        revenue_cat = households_in_cat * dap_mean
+        total_revenue_ars += revenue_cat
+        
+        print(f"{income_cat:<25} {households_in_cat:>8,} ${dap_mean:>13,.2f} ${revenue_cat:>18,.2f}")
     
     total_revenue_usd = total_revenue_ars / EXCHANGE_RATE
     
-    print("-" * 90)
-    print(f"{'TOTAL':<40} {'':>13} {'':>13} ${total_revenue_ars:>18,.2f}")
+    print("-" * 70)
+    print(f"{'TOTAL':<25} {num_households:>8,} {'':>13} ${total_revenue_ars:>18,.2f}")
     print(f"\nIngreso anual Total (USD): ${total_revenue_usd:,.2f}")
     
     return {
         'total_revenue_ars': total_revenue_ars,
         'total_revenue_usd': total_revenue_usd,
-        'by_income': total_revenue_ars_by_income,
-        'income_distribution': income_distribution,
-        'mean_dap_by_income': mean_dap_by_income
+        'by_income': income_dap_means,
+        'income_counts': income_counts,
+        'overall_weighted_dap': overall_weighted_dap if total_responses > 0 else 0
     }
 
 discrimination_cloaca = calculate_discriminated_income(df_cloaca_clean, 'Cloaca', HOUSEHOLDS_CLOACAS)
@@ -253,7 +339,7 @@ print("TAREA 4: COMPARACIÓN - CON Y SIN DISCRIMINACIÓN DE PRECIOS")
 print("=" * 80)
 print()
 
-def compare_scenarios(project_name, income_results, discrimination_results, num_households):
+def compare_scenarios(project_name, income_results, discrimination_results):
     """Compare revenue with and without price discrimination"""
     print(f"\n{project_name.upper()}")
     print("-" * 80)
@@ -292,10 +378,12 @@ def compare_scenarios(project_name, income_results, discrimination_results, num_
         print(f"  Esto INCREMENTA la necesidad de subsidios del Estado.")
     
     print(f"\n  Análisis por nivel de ingreso:")
-    lower_income = discrimination_results['income_distribution'].get('Menos de $ 20000', 0) + \
-                   discrimination_results['income_distribution'].get('Entre $ 20000 y $ 30000', 0)
-    print(f"    - Los hogares con menores ingresos pagan menos (subsidio implícito)")
-    print(f"    - Los hogares con mayores ingresos pagan más (contribuyen más)")
+    lower_income = discrimination_results['income_counts'].get('Menos de $ 20000', 0) + \
+                   discrimination_results['income_counts'].get('Entre $ 20000 y $ 30000', 0)
+    higher_income = discrimination_results['income_counts'].get('$ 60000 o más', 0) + \
+                    discrimination_results['income_counts'].get('Entre $ 40000 y $ 60000', 0)
+    print(f"    - Hogares de menores ingresos: {lower_income} respuestas (pagan menos)")
+    print(f"    - Hogares de mayores ingresos: {higher_income} respuestas (pagan más)")
     print(f"    - Esto tiene un efecto PROGRESIVO que reduce la carga sobre el Estado")
     
     return {
@@ -306,8 +394,8 @@ def compare_scenarios(project_name, income_results, discrimination_results, num_
         'pct_diff_mean': pct_diff_mean
     }
 
-comparison_cloaca = compare_scenarios('Cloaca', income_cloaca, discrimination_cloaca, HOUSEHOLDS_CLOACAS)
-comparison_ptar = compare_scenarios('PTAR', income_ptar, discrimination_ptar, HOUSEHOLDS_TOTAL_CITY)
+comparison_cloaca = compare_scenarios('Cloaca', income_cloaca, discrimination_cloaca)
+comparison_ptar = compare_scenarios('PTAR', income_ptar, discrimination_ptar)
 
 # ============================================================================
 # TASK 5: BENEFITS FROM REDUCED BOTTLED WATER CONSUMPTION
